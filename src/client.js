@@ -3,8 +3,7 @@ import { createClient } from '@sanity/client';
 const projectid = process.env.REACT_APP_SANITY_PROJECT_ID;
 const token = process.env.REACT_APP_SANITY_PROJECT_TOKEN;
 
-console.log(projectid);
-console.log(token);
+
 
 
 const client = createClient({

@@ -36,14 +36,22 @@ const Login = () => {
                                     
                                     const doc = {
                                         _id:jti,
-                                        email: email,
-                                        _type: 'user',
-                                        userName: name,
+                                        _type: 'userProfile',
+                                        username: name,
                                         image: picture
-                                    };
-                                    console.log(doc)
-                                  
-                                            navigate('/', { replace: true })
+                                    }
+                                    async function createDoc(doc) {
+                                        try {
+                                          const response = await client.createIfNotExists(doc);
+                                          console.log(response._id);
+                                          navigate('/', { replace: true });
+                                        } catch (error) {
+                                          console.error(error);
+                                        }
+                                      }
+                                      
+                                      createDoc(doc);
+                                      
                                       
                                 }}
 
