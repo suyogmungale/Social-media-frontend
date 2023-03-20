@@ -4,11 +4,13 @@ import { FcGoogle } from 'react-icons/fc';
 import shareVideo from '../asset/share.mp4';
 import logo from '../asset/logowhite.png'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import client from '../client';
+import {client} from '../client';
 import jwt_decode from 'jwt-decode'
 
 const Login = () => {
     const navigate = useNavigate();
+    
+
     return (
         <div className=' flex justify-start items-center flex-col h-screen'>
 
@@ -32,25 +34,22 @@ const Login = () => {
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
                             <GoogleLogin
                                 onSuccess={credentialResponse => {
+                                    console.log(credentialResponse.profileObj);
                                     const {email,name,picture,jti} = jwt_decode(credentialResponse.credential);
                                     
-                                    const doc = {
+                                    console.log(jwt_decode(credentialResponse.credential))
+                                     let doc = {
                                         _id:jti,
-                                        _type: 'userProfile',
+                                        _type: 'user',
                                         username: name,
                                         image: picture
                                     }
-                                    async function createDoc(doc) {
-                                        try {
-                                          const response = await client.createIfNotExists(doc);
-                                          console.log(response._id);
+                                       client.createIfNotExists(doc);
+                                        
                                           navigate('/', { replace: true });
-                                        } catch (error) {
-                                          console.error(error);
-                                        }
-                                      }
+                                        
                                       
-                                      createDoc(doc);
+                                      //createDoc(doc);
                                       
                                       
                                 }}

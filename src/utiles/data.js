@@ -1,30 +1,42 @@
-import sanityClient from '@sanity/client'
-import client from '../client'
+import { createClient } from "@sanity/client";
+import groq from 'groq';
+import { useState, useEffect } from 'react';
 
-export const useQuery =  (userId) => {
-    const query = `*[_type == 'user' && username == '${userId}']`;
+const clientConfig = {
+    projectId:'n7301ijd', 
+    dataset: 'production',
+    apiVersion:'2021-11-16',
+    useCdn: false 
+}
 
-return query
-
-
-}   
-//const query = `*[_type == 'user' && username == '${name}']`;
-
-    /*const query = `*[_type == "user"] {
-        _id,
-        image,
-        username
-      }`
-
-    try {
-        const data = await client.fetch(query);
-        localStorage.setItem('userData', JSON.stringify(data));
-        console.log(data)
-        return data;
-    } catch (error) {
-        // Handle any errors
-        console.error(error)
+export const userQuery = () => {
+    return createClient(clientConfig).fetch(groq`
+    *[_type == "user"]{
+        username,
+        image
     }
+    `);
+}
 
-} */
+/* export const userQuery = () => {
+    const [items, setItems] = useState([]);
 
+    useEffect(() => {
+        getCorgis().then((data) => {
+            setItems(data);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }, []);
+
+    return (
+        <div>
+            {items.map((item) => {
+                return (
+                    <h1 >{item.image}</h1>
+                );
+            })}
+        </div>
+    );
+}
+*/
