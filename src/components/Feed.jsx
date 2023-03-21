@@ -2,16 +2,39 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import client from '../client'
+import {client} from '../client'
+import { feedQuery, searchQuery } from '../utiles/data';
 //import data from '../utiles/data';
 import MasonaryLayout from './MasonaryLayout';
 import Spiner from './Spiner';
 const Feed = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [pins, setPins] = useState(null)
+  const {categoryId} = useParams();
+  
+  useEffect(() => {
+    if (categoryId) {
+      setLoading(true);
+      const query = searchQuery(categoryId);
+      client.fetch(query).then((data) => {
+        setPins(data);
+        setLoading(false);
+      });
+    } else {
+      setLoading(true);
+
+      client.fetch(feedQuery).then((data) => {
+        setPins(data);
+        setLoading(false);
+      });
+    }
+  }, [categoryId]);
 
   if(loading) return <Spiner message='we are adding new ideas to yoour feed!' />
   return (
-    <div>Feed</div>
+    <div>
+      {pins && <MasonaryLayout pins={pins}/>}
+      </div>
   )
 }
 

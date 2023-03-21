@@ -11,7 +11,7 @@ export const client = createClient({
   projectId:projectid, 
   dataset: 'production',
   apiVersion:'2021-11-16',
-  useCdn: false,
+  useCdn: true,
   token:token,
   ignoreBrowserTokenWarning: true       
 });

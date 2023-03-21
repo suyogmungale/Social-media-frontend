@@ -18,25 +18,52 @@ export const userQuery = () => {
     `);
 }
 
-/* export const userQuery = () => {
-    const [items, setItems] = useState([]);
+export const searchQuery = (searchTerm) => {
+    const query = `*[_type == "pin" && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
+          image{
+            asset->{
+              url
+            }
+          },
+              _id,
+              destination,
+              postedBy->{
+                _id,
+                userName,
+                image
+              },
+              save[]{
+                _key,
+                postedBy->{
+                  _id,
+                  userName,
+                  image
+                },
+              },
+            }`;
+    return query;
+  };
 
-    useEffect(() => {
-        getCorgis().then((data) => {
-            setItems(data);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }, []);
-
-    return (
-        <div>
-            {items.map((item) => {
-                return (
-                    <h1 >{item.image}</h1>
-                );
-            })}
-        </div>
-    );
-}
-*/
+  
+  export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
+    image{
+      asset->{
+        url
+      }
+    },
+        _id,
+        destination,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+        save[]{
+          _key,
+          postedBy->{
+            _id,
+            userName,
+            image
+          },
+        },
+      } `;
