@@ -7,6 +7,7 @@ import UserProfile from '../components/UserProfile';
 import Pins from './Pins';
 import logo from '../asset/logo.png';
 import { userQuery } from '../utiles/data';
+import { fetchUser } from '../utiles/fetchUser';
 
 const Home = () => {
 
@@ -14,6 +15,8 @@ const Home = () => {
   const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
 
+  const userInfo = fetchUser();
+  
   useEffect(() => {
     userQuery().then((data) => {
         setUser(data[0]);
