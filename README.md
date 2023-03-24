@@ -1,11 +1,20 @@
+<h1>Social media app<h1>
+this is social media website 
 
+<h1>ReactJs<h1>this website is made using reactjs for the frontend
 
-### `npm start`
+<h1>Sanity.io<h1> for the backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1>Google Aouth <h1>
+for the authentication and sign in i use google aoouth
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+here user upload their images 
+
+like, comment, save, download, other user's images
+search specific images
+<img src='/src/asset/Screenshot (20).png' alt='image'>
+
+<img src='/src/asset/Screenshot (19).png' alt='image'>
+
 
 <img src='/src/asset/Screenshot (21).png' alt='image'>
