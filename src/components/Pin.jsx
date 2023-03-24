@@ -52,6 +52,7 @@ const Pin = ({ pin }) => {
     }
   };
 
+
   return (
     <div className="m-2">
       <div
