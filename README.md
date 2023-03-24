@@ -1,7 +1,7 @@
 Social media app
 this is social media website 
 
-ReactJs this website is made using reactjs for the frontend
+Iuse Reactjs for the frontend
 
 Sanity.io for the backend
 
